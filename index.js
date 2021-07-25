@@ -11,6 +11,8 @@ if (process.env.PACKAGEJSON_DIR) {
 Toolkit.run(async (tools) => {
   const pkg = tools.getPackageJSON();
   const event = tools.context.payload;
+  console.log('package:', pkg);
+  console.log('event:', event);
 
   if (!event.commits) {
     console.log("Couldn't find any commits in this event, incrementing patch version...");
@@ -20,7 +22,6 @@ Toolkit.run(async (tools) => {
   const messages = event.commits ? event.commits.map((commit) => commit.message + '\n' + commit.body) : [];
 
   const commitMessage = process.env['INPUT_COMMIT-MESSAGE'] || 'ci: version bump to {{version}}';
-  console.log('commit messages:', messages);
   const commitMessageRegex = new RegExp(commitMessage.replace(/{{version}}/g, `${tagPrefix}\\d+\\.\\d+\\.\\d+`), 'ig');
   const isVersionBump = messages.find((message) => commitMessageRegex.test(message)) !== undefined;
 
