@@ -13,11 +13,11 @@ inputs:
     required: false
   minor-wording:
     description: 'Words list that trigger a minor version bump'
-    default: 'feat,minor'
+    default: 'MINOR'
     required: false
   major-wording:
     description: 'Words list that trigger a major version bump'
-    default: 'BREAKING CHANGE,major'
+    default: 'MAJOR'
     required: false
   patch-wording:
     description: 'Words list that trigger a patch version bump'
